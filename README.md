@@ -1,3 +1,103 @@
+## Generated readme below
+
+### Install & run
+1) npm install
+2) nest start
+
+### Queries 
+#### rest: 
+``` 
+GET
+localhost:3000/rest/pagination?pageSize=10&pageNumber=1
+localhost:3000/rest/byPosition?position=1
+localhost:3000/rest/byYear?year=1984
+localhost:3000/rest/ (get all)
+```
+
+```
+POST localhost:3000/rest/ 
+{
+    "position": 251,
+    "title": "Трое из Простоквашино",
+    "year": 1989,
+    "rating": 9.2
+  }
+```
+
+```
+PUT localhost:3000/rest/ 
+{
+	"oldPosition": 1,
+	"film": {
+    "position": 1,
+    "title": "Какой-то фильм",
+    "year": 0,
+    "rating": 9.2
+  }
+}
+```
+
+``` 
+DELETE localhost:3000/rest/byPosition?position=2 
+```
+
+#### GRAPH
+``` 
+GET
+localhost:3000/graphql?query={findByPosition(position: "1"){title,position,year,rating}}
+localhost:3000/graphql?query={findByYear(year: "1984"){title,position,year,rating}}
+localhost:3000/graphql?query={getPage(pageSize: "10", pageNumber: "1"){title,position,year,rating}}
+localhost:3000/graphql?query={filter(filter: {minYear: 1999, minRating: 8, namePart: "Dark"}){title,position,year,rating}}
+```
+
+```
+POST localhost:3000/graphql
+mutation {
+  addItem(
+    item:
+    {
+      title:"Трое из Простоквашино",
+      position:251,
+      year:1989,
+      rating:7
+    }
+  )
+  {position,title,year,rating}
+}
+```
+
+```
+POST localhost:3000/graphql
+mutation {
+  updateItem(
+    item: {
+      oldPosition: 1,
+      film:
+      {
+        title:"Трое из Простоквашино",
+        position:1,
+        year:1989,
+        rating:7
+      } 
+    }    
+  )
+  {position,title,year,rating}
+}
+```
+
+```
+POST localhost:3000/graphql
+mutation {
+  deleteByPosition(
+    item: {
+      position: 2     
+    }    
+  )
+  {position,title,year,rating}
+}
+```
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>

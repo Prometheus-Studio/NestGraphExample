@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FilmRecipe {
+  position: Int!
+  title: String!
+  year: Int!
+  rating: Float!
+}
+
+type Query {
+  findByPosition(position: String!): FilmRecipe!
+  findByYear(year: String!): [FilmRecipe!]!
+  getPage(pageNumber: String!, pageSize: String!): [FilmRecipe!]!
+  filter(filter: FilmFilter!): [FilmRecipe!]!
+}
+
+input FilmFilter {
+  minPosition: Int
+  maxPosition: Int
+  minYear: Int
+  maxYear: Int
+  minRating: Float
+  maxRating: Float
+  namePart: String
+}
+
+type Mutation {
+  addItem(item: FilmInput!): FilmRecipe!
+  updateItem(item: FilmUpdateInput!): FilmRecipe!
+  deleteByPosition(item: PositionInput!): FilmRecipe!
+}
+
+input FilmInput {
+  position: Int!
+  title: String!
+  year: Int!
+  rating: Float!
+}
+
+input FilmUpdateInput {
+  oldPosition: Int!
+  film: FilmInput!
+}
+
+input PositionInput {
+  position: Int!
+}
